@@ -20,7 +20,7 @@ __version__ = "HEAD"
 # be chosen to provide adequate temporal resolution.
 TICKSPERQUARTERNOTE = 960
 
-controllerEventTypes = {"pan": 0x0A}
+controller_event_types = {"pan": 0x0A}
 
 # Define some constants
 
@@ -127,7 +127,7 @@ class NoteOn(GenericEvent):
         """
         midibytes = b""
         code = self.midi_status | self.channel
-        varTime = writeVarLength(self.tick - previous_event_tick)
+        varTime = write_var_length(self.tick - previous_event_tick)
         for timeByte in varTime:
             midibytes += struct.pack(">B", timeByte)
         midibytes += struct.pack(">B", code)
@@ -183,7 +183,7 @@ class NoteOff(GenericEvent):
         """
         midibytes = b""
         code = self.midi_status | self.channel
-        varTime = writeVarLength(self.tick - previous_event_tick)
+        varTime = write_var_length(self.tick - previous_event_tick)
         for timeByte in varTime:
             midibytes += struct.pack(">B", timeByte)
         midibytes += struct.pack(">B", code)
@@ -241,7 +241,7 @@ class Tempo(GenericEvent):
         subcode = 0x51
         fourbite = struct.pack(">L", self.tempo)  # big-endian uint32
         threebite = fourbite[1:4]  # Just discard the MSB
-        varTime = writeVarLength(self.tick - previous_event_tick)
+        varTime = write_var_length(self.tick - previous_event_tick)
         for timeByte in varTime:
             midibytes += struct.pack(">B", timeByte)
         midibytes += struct.pack(">B", code)
@@ -279,13 +279,13 @@ class Copyright(GenericEvent):
         midibytes = b""
         code = 0xFF
         subcode = 0x02
-        varTime = writeVarLength(self.tick - previous_event_tick)
+        varTime = write_var_length(self.tick - previous_event_tick)
         for timeByte in varTime:
             midibytes += struct.pack(">B", timeByte)
         midibytes += struct.pack(">B", code)
         midibytes += struct.pack(">B", subcode)
         payloadLength = len(self.notice)
-        payloadLengthVar = writeVarLength(payloadLength)
+        payloadLengthVar = write_var_length(payloadLength)
         for i in payloadLengthVar:
             midibytes += struct.pack("b", i)
         midibytes += self.notice
@@ -311,13 +311,13 @@ class Text(GenericEvent):
         midibytes = b""
         code = 0xFF
         subcode = 0x01
-        varTime = writeVarLength(self.tick - previous_event_tick)
+        varTime = write_var_length(self.tick - previous_event_tick)
         for timeByte in varTime:
             midibytes += struct.pack(">B", timeByte)
         midibytes += struct.pack(">B", code)
         midibytes += struct.pack(">B", subcode)
         payloadLength = len(self.text)
-        payloadLengthVar = writeVarLength(payloadLength)
+        payloadLengthVar = write_var_length(payloadLength)
         for i in payloadLengthVar:
             midibytes += struct.pack("B", i)
         midibytes += self.text
@@ -346,7 +346,7 @@ class KeySignature(GenericEvent):
         code = 0xFF
         subcode = 0x59
         event_subtype = 0x02
-        varTime = writeVarLength(self.tick - previous_event_tick)
+        varTime = write_var_length(self.tick - previous_event_tick)
         for timeByte in varTime:
             midibytes += struct.pack(">B", timeByte)
         midibytes += struct.pack(">B", code)
@@ -387,7 +387,7 @@ class ProgramChange(GenericEvent):
         """
         midibytes = b""
         code = self.midi_status | self.channel
-        varTime = writeVarLength(self.tick)
+        varTime = write_var_length(self.tick)
         for timeByte in varTime:
             midibytes += struct.pack(">B", timeByte)
         midibytes += struct.pack(">B", code)
@@ -419,12 +419,12 @@ class SysExEvent(GenericEvent):
         """
         midibytes = b""
         code = 0xF0
-        varTime = writeVarLength(self.tick - previous_event_tick)
+        varTime = write_var_length(self.tick - previous_event_tick)
         for timeByte in varTime:
             midibytes += struct.pack(">B", timeByte)
         midibytes += struct.pack(">B", code)
 
-        payloadLength = writeVarLength(len(self.payload) + 2)
+        payloadLength = write_var_length(len(self.payload) + 2)
         for lenByte in payloadLength:
             midibytes += struct.pack(">B", lenByte)
 
@@ -463,13 +463,13 @@ class UniversalSysExEvent(GenericEvent):
         """
         midibytes = b""
         code = 0xF0
-        varTime = writeVarLength(self.tick - previous_event_tick)
+        varTime = write_var_length(self.tick - previous_event_tick)
         for timeByte in varTime:
             midibytes += struct.pack(">B", timeByte)
         midibytes += struct.pack(">B", code)
 
         # Do we need to add a length?
-        payloadLength = writeVarLength(len(self.payload) + 5)
+        payloadLength = write_var_length(len(self.payload) + 5)
         for lenByte in payloadLength:
             midibytes += struct.pack(">B", lenByte)
 
@@ -512,7 +512,7 @@ class ControllerEvent(GenericEvent):
         """
         midibytes = b""
         code = self.midi_status | self.channel
-        varTime = writeVarLength(self.tick - previous_event_tick)
+        varTime = write_var_length(self.tick - previous_event_tick)
         for timeByte in varTime:
             midibytes += struct.pack(">B", timeByte)
         midibytes += struct.pack(">B", code)
@@ -551,7 +551,7 @@ class ChannelPressureEvent(GenericEvent):
         """
         midibytes = b""
         code = self.midi_status | self.channel
-        vartick = writeVarLength(self.tick - previous_event_tick)
+        vartick = write_var_length(self.tick - previous_event_tick)
         for x in vartick:
             midibytes += struct.pack(">B", x)
         midibytes += struct.pack(">B", code)
@@ -584,7 +584,7 @@ class PitchWheelEvent(GenericEvent):
         """
         midibytes = b""
         code = self.midi_status | self.channel
-        varTime = writeVarLength(self.tick - previous_event_tick)
+        varTime = write_var_length(self.tick - previous_event_tick)
         for timeByte in varTime:
             midibytes = midibytes + struct.pack(">B", timeByte)
         MSB = (self.pitch_wheel_value + 8192) >> 7
@@ -622,13 +622,13 @@ class TrackName(GenericEvent):
         writing into a standard midi file.
         """
         midibytes = b""
-        varTime = writeVarLength(self.tick - previous_event_tick)
+        varTime = write_var_length(self.tick - previous_event_tick)
         for timeByte in varTime:
             midibytes += struct.pack(">B", timeByte)
         midibytes += struct.pack("B", 0xFF)
         midibytes += struct.pack("B", 0x03)
         dataLength = len(self.trackName)
-        dataLengthVar = writeVarLength(dataLength)
+        dataLengthVar = write_var_length(dataLength)
         for i in dataLengthVar:
             midibytes += struct.pack("B", i)
         midibytes += self.trackName
@@ -665,7 +665,7 @@ class TimeSignature(GenericEvent):
         midibytes = b""
         code = 0xFF
         subcode = 0x58
-        varTime = writeVarLength(self.tick - previous_event_tick)
+        varTime = write_var_length(self.tick - previous_event_tick)
         for timeByte in varTime:
             midibytes += struct.pack(">B", timeByte)
         midibytes += struct.pack(">B", code)
@@ -690,18 +690,18 @@ class MIDITrack(object):
         self.dataLength = 0  # Is calculated after the data is in place
         self.MIDIdata = b""
         self.closed = False
-        self.eventList = []
+        self.event_list = []
         self.MIDIEventList = []
         self.remdep = removeDuplicates
         self.deinterleave = deinterleave
 
-    def addNoteByNumber(
+    def add_note_by_number(
         self, channel, pitch, tick, duration, volume, annotation=None, insertion_order=0
     ):
         """
         Add a note by chromatic MIDI number
         """
-        self.eventList.append(
+        self.event_list.append(
             NoteOn(
                 channel,
                 pitch,
@@ -716,7 +716,7 @@ class MIDITrack(object):
         # This event is not in chronological order. But before writing all the
         # events to the file, I sort self.eventlist on (tick, sec_sort_order, insertion_order)
         # which puts the events in chronological order.
-        self.eventList.append(
+        self.event_list.append(
             NoteOff(
                 channel,
                 pitch,
@@ -727,14 +727,14 @@ class MIDITrack(object):
             )
         )
 
-    def addControllerEvent(
+    def add_controller_event(
         self, channel, tick, controller_number, parameter, insertion_order=0
     ):
         """
         Add a controller event.
         """
 
-        self.eventList.append(
+        self.event_list.append(
             ControllerEvent(
                 channel,
                 tick,
@@ -744,31 +744,31 @@ class MIDITrack(object):
             )
         )
 
-    def addPitchWheelEvent(self, channel, tick, pitch_wheel_value, insertion_order=0):
+    def add_pitch_wheel_event(self, channel, tick, pitch_wheel_value, insertion_order=0):
         """
         Add a pitch wheel event.
         """
-        self.eventList.append(
+        self.event_list.append(
             PitchWheelEvent(
                 channel, tick, pitch_wheel_value, insertion_order=insertion_order
             )
         )
 
-    def addTempo(self, tick, tempo, insertion_order=0):
+    def add_tempo(self, tick, tempo, insertion_order=0):
         """
         Add a tempo change (or set) event.
         """
-        self.eventList.append(Tempo(tick, tempo, insertion_order=insertion_order))
+        self.event_list.append(Tempo(tick, tempo, insertion_order=insertion_order))
 
-    def addSysEx(self, tick, manID, payload, insertion_order=0):
+    def add_sys_ex(self, tick, manID, payload, insertion_order=0):
         """
         Add a SysEx event.
         """
-        self.eventList.append(
+        self.event_list.append(
             SysExEvent(tick, manID, payload, insertion_order=insertion_order)
         )
 
-    def addUniversalSysEx(
+    def add_universal_sys_ex(
         self,
         tick,
         code,
@@ -781,7 +781,7 @@ class MIDITrack(object):
         """
         Add a Universal SysEx event.
         """
-        self.eventList.append(
+        self.event_list.append(
             UniversalSysExEvent(
                 tick,
                 realTime,
@@ -797,7 +797,7 @@ class MIDITrack(object):
         """
         Add a program change event.
         """
-        self.eventList.append(
+        self.event_list.append(
             ProgramChange(channel, tick, program, insertion_order=insertion_order)
         )
 
@@ -805,7 +805,7 @@ class MIDITrack(object):
         """
         Add a channel pressure event.
         """
-        self.eventList.append(
+        self.event_list.append(
             ChannelPressureEvent(
                 channel, tick, pressure_value, insertion_order=insertion_order
             )
@@ -815,7 +815,7 @@ class MIDITrack(object):
         """
         Add a track name event.
         """
-        self.eventList.append(
+        self.event_list.append(
             TrackName(tick, trackName, insertion_order=insertion_order)
         )
 
@@ -831,7 +831,7 @@ class MIDITrack(object):
         """
         Add a time signature.
         """
-        self.eventList.append(
+        self.event_list.append(
             TimeSignature(
                 tick,
                 numerator,
@@ -846,7 +846,7 @@ class MIDITrack(object):
         """
         Add a copyright notice
         """
-        self.eventList.append(Copyright(tick, notice, insertion_order=insertion_order))
+        self.event_list.append(Copyright(tick, notice, insertion_order=insertion_order))
 
     def addKeySignature(
         self, tick, accidentals, accidental_type, mode, insertion_order=0
@@ -854,7 +854,7 @@ class MIDITrack(object):
         """
         Add a copyright notice
         """
-        self.eventList.append(
+        self.event_list.append(
             KeySignature(
                 tick,
                 accidentals,
@@ -868,9 +868,9 @@ class MIDITrack(object):
         """
         Add a text event
         """
-        self.eventList.append(Text(tick, text, insertion_order=insertion_order))
+        self.event_list.append(Text(tick, text, insertion_order=insertion_order))
 
-    def changeNoteTuning(
+    def change_note_tuning(
         self,
         tunings,
         sysExChannel=0x7F,
@@ -885,11 +885,11 @@ class MIDITrack(object):
         payload = payload + struct.pack(">B", len(tunings))
         for (noteNumber, frequency) in tunings:
             payload = payload + struct.pack(">B", noteNumber)
-            MIDIFreqency = frequencyTransform(frequency)
+            MIDIFreqency = frequency_transform(frequency)
             for byte in MIDIFreqency:
                 payload = payload + struct.pack(">B", byte)
 
-        self.eventList.append(
+        self.event_list.append(
             UniversalSysExEvent(
                 0,
                 realTime,
@@ -907,7 +907,7 @@ class MIDITrack(object):
         which is then sorted to be in chronological order by start tick.
         """
 
-        self.MIDIEventList = [evt for evt in self.eventList]
+        self.MIDIEventList = [evt for evt in self.event_list]
         # Assumptions in the code expect the list to be time-sorted.
         self.MIDIEventList.sort(key=sort_events)
 
@@ -916,20 +916,20 @@ class MIDITrack(object):
 
     def removeDuplicates(self):
         """
-        Remove duplicates from the eventList.
+        Remove duplicates from the event_list.
 
-        This function will remove duplicates from the eventList. This is
+        This function will remove duplicates from the event_list. This is
         necessary because we the MIDI event stream can become confused
         otherwise.
         """
 
-        # For this algorithm to work, the events in the eventList must be
+        # For this algorithm to work, the events in the event_list must be
         # hashable (that is, they must have a __hash__() and __eq__() function
         # defined).
 
-        s = set(self.eventList)
-        self.eventList = list(s)
-        self.eventList.sort(key=sort_events)
+        s = set(self.event_list)
+        self.event_list = list(s)
+        self.event_list.sort(key=sort_events)
 
     def closeTrack(self):
         """
@@ -937,7 +937,7 @@ class MIDITrack(object):
 
         This function should be called to "close a track," that is to
         prepare the actual data stream for writing. Duplicate events are
-        removed from the eventList, and the MIDIEventList is created.
+        removed from the event_list, and the MIDIEventList is created.
 
         Called by the parent MIDIFile object.
         """
@@ -956,7 +956,7 @@ class MIDITrack(object):
         Write the meta data and note data to the packed MIDI stream.
         """
 
-        # Process the events in the eventList
+        # Process the events in the event_list
 
         self.writeEventsToStream()
 
@@ -1091,7 +1091,7 @@ class MIDIHeader(object):
         self.numTracks = struct.pack(">H", numTracks)
         self.ticks_per_quarternote = struct.pack(">H", ticks_per_quarternote)
 
-    def writeFile(self, fileHandle):
+    def write_file(self, fileHandle):
         fileHandle.write(self.headerString)
         fileHandle.write(self.headerSize)
         fileHandle.write(self.formatnum)
@@ -1211,7 +1211,7 @@ class MIDIFile(object):
     def tick_to_quarter(self, ticknum):
         return float(ticknum) / self.ticks_per_quarternote
 
-    def addNote(self, track, channel, pitch, time, duration, volume, annotation=None):
+    def add_note(self, track, channel, pitch, time, duration, volume, annotation=None):
         """
 
         Add notes to the MIDIFile object
@@ -1236,7 +1236,7 @@ class MIDIFile(object):
         """
         if self.header.numeric_format == 1:
             track += 1
-        self.tracks[track].addNoteByNumber(
+        self.tracks[track].add_note_by_number(
             channel,
             pitch,
             self.time_to_ticks(time),
@@ -1329,7 +1329,7 @@ class MIDIFile(object):
         )
         self.event_counter += 1
 
-    def addTempo(self, track, time, tempo):
+    def add_tempo(self, track, time, tempo):
         """
 
         Add notes to the MIDIFile object
@@ -1342,7 +1342,7 @@ class MIDIFile(object):
         """
         if self.header.numeric_format == 1:
             track = 0
-        self.tracks[track].addTempo(
+        self.tracks[track].add_tempo(
             self.time_to_ticks(time), tempo, insertion_order=self.event_counter
         )
         self.event_counter += 1
@@ -1468,7 +1468,7 @@ class MIDIFile(object):
         )
         self.event_counter += 1
 
-    def addControllerEvent(self, track, channel, time, controller_number, parameter):
+    def add_controller_event(self, track, channel, time, controller_number, parameter):
         """
 
         Add a channel control event
@@ -1483,7 +1483,7 @@ class MIDIFile(object):
         """
         if self.header.numeric_format == 1:
             track += 1
-        self.tracks[track].addControllerEvent(
+        self.tracks[track].add_controller_event(
             channel,
             self.time_to_ticks(time),
             controller_number,
@@ -1492,7 +1492,7 @@ class MIDIFile(object):
         )  # noqa: E128
         self.event_counter += 1
 
-    def addPitchWheelEvent(self, track, channel, time, pitchWheelValue):
+    def add_pitch_wheel_event(self, track, channel, time, pitchWheelValue):
         """
 
         Add a channel pitch wheel event
@@ -1504,7 +1504,7 @@ class MIDIFile(object):
         """
         if self.header.numeric_format == 1:
             track += 1
-        self.tracks[track].addPitchWheelEvent(
+        self.tracks[track].add_pitch_wheel_event(
             channel,
             self.time_to_ticks(time),
             pitchWheelValue,
@@ -1512,7 +1512,7 @@ class MIDIFile(object):
         )
         self.event_counter += 1
 
-    def makeRPNCall(
+    def make_rpn_call(
         self,
         track,
         channel,
@@ -1542,10 +1542,10 @@ class MIDIFile(object):
 
         As an example, if one were to change a channel's tuning program::
 
-            makeRPNCall(track, channel, time, 0, 3, 0, program)
+            make_rpn_call(track, channel, time, 0, 3, 0, program)
 
         (Note, however, that there is a convenience function,
-        ``changeTuningProgram``, that does this for you.)
+        ``change_tuning_program``, that does this for you.)
 
         Registered/Non-Registered Parameter Number (RPN / NRPN)
         -------------------------------------------------------
@@ -1585,7 +1585,7 @@ class MIDIFile(object):
         track = self.tracks[track]
 
         tick_incr = 1 if time_order else 0
-        track.addControllerEvent(
+        track.add_controller_event(
             channel,
             tick,
             101,  # parameter number MSB
@@ -1594,23 +1594,23 @@ class MIDIFile(object):
         )  # noqa: E128
         self.event_counter += 1
         tick += tick_incr
-        track.addControllerEvent(
+        track.add_controller_event(
             channel, tick, 100, controller_lsb, insertion_order=self.event_counter
         )  # noqa: E128
         self.event_counter += 1
         tick += tick_incr
-        track.addControllerEvent(
+        track.add_controller_event(
             channel, tick, 6, data_msb, insertion_order=self.event_counter
         )  # noqa: E128
         self.event_counter += 1
         tick += tick_incr
         if data_lsb is not None:
-            track.addControllerEvent(
+            track.add_controller_event(
                 channel, tick, 38, data_lsb, insertion_order=self.event_counter
             )  # noqa: E128
             self.event_counter += 1
 
-    def makeNRPNCall(
+    def make_nrpn_call(
         self,
         track,
         channel,
@@ -1657,28 +1657,28 @@ class MIDIFile(object):
         track = self.tracks[track]
 
         tick_incr = 1 if time_order else 0
-        track.addControllerEvent(
+        track.add_controller_event(
             channel, tick, 99, controller_msb, insertion_order=self.event_counter
         )  # noqa: E128
         self.event_counter += 1
         tick += tick_incr
-        track.addControllerEvent(
+        track.add_controller_event(
             channel, tick, 98, controller_lsb, insertion_order=self.event_counter
         )  # noqa: E128
         self.event_counter += 1
         tick += tick_incr
-        track.addControllerEvent(
+        track.add_controller_event(
             channel, tick, 6, data_msb, insertion_order=self.event_counter
         )  # noqa: E128
         self.event_counter += 1
         tick += tick_incr
         if data_lsb is not None:
-            track.addControllerEvent(
+            track.add_controller_event(
                 channel, tick, 38, data_lsb, insertion_order=self.event_counter
             )  # noqa: E128
             self.event_counter += 1
 
-    def changeTuningBank(self, track, channel, time, bank, time_order=False):
+    def change_tuning_bank(self, track, channel, time, bank, time_order=False):
         """
 
         Change the tuning bank for a selected track
@@ -1688,7 +1688,7 @@ class MIDIFile(object):
         :param time: The time of the event
         :param bank: The tuning bank (0-127)
         :param time_order: Preserve the ordering of the component events by
-            ordering in time. See ``makeRPNCall()`` for a discussion of when
+            ordering in time. See ``make_rpn_call()`` for a discussion of when
             this may be necessary
 
         Note that this is a convenience function, as the same
@@ -1696,10 +1696,10 @@ class MIDIFile(object):
         events.
 
         The specified tuning should already have been written to the
-        stream with ``changeNoteTuning``."""
-        self.makeRPNCall(track, channel, time, 0, 4, 0, bank, time_order=time_order)
+        stream with ``change_note_tuning``."""
+        self.make_rpn_call(track, channel, time, 0, 4, 0, bank, time_order=time_order)
 
-    def changeTuningProgram(self, track, channel, time, program, time_order=False):
+    def change_tuning_program(self, track, channel, time, program, time_order=False):
         """
 
         Change the tuning program for a selected track
@@ -1709,7 +1709,7 @@ class MIDIFile(object):
         :param time: The time of the event
         :param program: The tuning program number (0-127)
         :param time_order: Preserve the ordering of the component events by
-            ordering in time. See ``makeRPNCall()`` for a discussion of when
+            ordering in time. See ``make_rpn_call()`` for a discussion of when
             this may be necessary
 
         Note that this is a convenience function, as the same
@@ -1717,11 +1717,11 @@ class MIDIFile(object):
         events.
 
         The specified tuning should already have been written to the
-        stream with ``changeNoteTuning``.
+        stream with ``change_note_tuning``.
         """
-        self.makeRPNCall(track, channel, time, 0, 3, 0, program, time_order=time_order)
+        self.make_rpn_call(track, channel, time, 0, 3, 0, program, time_order=time_order)
 
-    def changeNoteTuning(
+    def change_note_tuning(
         self, track, tunings, sysExChannel=0x7F, realTime=True, tuningProgam=0
     ):
         """
@@ -1755,11 +1755,11 @@ class MIDIFile(object):
             from midiutil.MidiFile import MIDIFile
             MyMIDI = MIDIFile(1)
             tuning = [(69, 500)]
-            MyMIDI.changeNoteTuning(0, tuning, tuningProgam=0)
+            MyMIDI.change_note_tuning(0, tuning, tuningProgam=0)
         """
         if self.header.numeric_format == 1:
             track += 1
-        self.tracks[track].changeNoteTuning(
+        self.tracks[track].change_note_tuning(
             tunings,
             sysExChannel,
             realTime,
@@ -1768,7 +1768,7 @@ class MIDIFile(object):
         )
         self.event_counter += 1
 
-    def addSysEx(self, track, time, manID, payload):
+    def add_sys_ex(self, track, time, manID, payload):
         """
 
         Add a System Exclusive event.
@@ -1788,12 +1788,12 @@ class MIDIFile(object):
         tick = self.time_to_ticks(time)
         if self.header.numeric_format == 1:
             track += 1
-        self.tracks[track].addSysEx(
+        self.tracks[track].add_sys_ex(
             tick, manID, payload, insertion_order=self.event_counter
         )
         self.event_counter += 1
 
-    def addUniversalSysEx(
+    def add_universal_sys_ex(
         self, track, time, code, subcode, payload, sysExChannel=0x7F, realTime=False
     ):
         """
@@ -1815,7 +1815,7 @@ class MIDIFile(object):
         constructing the payload. It is recommended that higher-level helper
         functions be written to wrap this function and construct the payload if
         a developer finds him or herself using the function heavily. As an
-        example of such a helper function, see the ``changeNoteTuning()``
+        example of such a helper function, see the ``change_note_tuning()``
         function, which uses the event to create a real-time note tuning
         update.
 
@@ -1823,7 +1823,7 @@ class MIDIFile(object):
         tick = self.time_to_ticks(time)
         if self.header.numeric_format == 1:
             track += 1
-        self.tracks[track].addUniversalSysEx(
+        self.tracks[track].add_universal_sys_ex(
             tick,
             code,
             subcode,
@@ -1834,7 +1834,7 @@ class MIDIFile(object):
         )  # noqa: E128
         self.event_counter += 1
 
-    def writeFile(self, fileHandle):
+    def write_file(self, fileHandle):
         """
         Write the MIDI File.
 
@@ -1842,7 +1842,7 @@ class MIDIFile(object):
             writing.
         """
 
-        self.header.writeFile(fileHandle)
+        self.header.write_file(fileHandle)
 
         # Close the tracks and have them create the MIDI event data structures.
         self.close()
@@ -1851,20 +1851,20 @@ class MIDIFile(object):
         for i in range(0, self.numTracks):
             self.tracks[i].writeTrack(fileHandle)
 
-    def shiftTracks(self, offset=0):
+    def shift_tracks(self, offset=0):
         """Shift tracks to be zero-origined, or origined at offset.
 
         Note that the shifting of the time in the tracks uses the MIDIEventList
         -- in other words it is assumed to be called in the stage where the
         MIDIEventList has been created. This function, however, it meant to
-        operate on the eventList itself.
+        operate on the event_list itself.
         """
         origin = 100000000  # A little silly, but we'll assume big enough
         tick_offset = self.time_to_ticks(offset)
 
         for track in self.tracks:
-            if len(track.eventList) > 0:
-                for event in track.eventList:
+            if len(track.event_list) > 0:
+                for event in track.event_list:
                     if event.tick < origin:
                         origin = event.tick
 
@@ -1872,14 +1872,14 @@ class MIDIFile(object):
             tempEventList = []
             # runningTick = 0
 
-            for event in track.eventList:
+            for event in track.event_list:
                 adjustedTick = event.tick - origin
                 # event.time = adjustedTime - runningTick + tick_offset
                 event.tick = adjustedTick + tick_offset
                 # runningTick = adjustedTick
                 tempEventList.append(event)
 
-            track.eventList = tempEventList
+            track.event_list = tempEventList
 
     # End Public Functions ########################
 
@@ -1903,7 +1903,7 @@ class MIDIFile(object):
             # of event.
             self.tracks[i].MIDIEventList.sort(key=sort_events)
 
-        origin = self.findOrigin()
+        origin = self.find_origin()
 
         for i in range(0, self.numTracks):
             self.tracks[i].adjustTimeAndOrigin(origin, self.adjust_origin)
@@ -1911,7 +1911,7 @@ class MIDIFile(object):
 
         self.closed = True
 
-    def findOrigin(self):
+    def find_origin(self):
         """
         Find the earliest time in the file's tracks.append.
         """
@@ -1931,7 +1931,7 @@ class MIDIFile(object):
         return origin
 
 
-def writeVarLength(i):
+def write_var_length(i):
     """
     Accept an integer, and serialize it as a MIDI file variable length quantity
 
@@ -1964,10 +1964,10 @@ def writeVarLength(i):
     return vlbytes
 
 
-# readVarLength is taken from the MidiFile class.
+# read_var_length is taken from the MidiFile class.
 
 
-def readVarLength(offset, buffer):
+def read_var_length(offset, buffer):
     """
     A function to read a MIDI variable length variable.
 
@@ -1988,7 +1988,7 @@ def readVarLength(offset, buffer):
     return (output, bytesRead)
 
 
-def frequencyTransform(freq):
+def frequency_transform(freq):
     """
     Returns a three-byte transform of a frequency.
     """
@@ -2008,9 +2008,9 @@ def frequencyTransform(freq):
     return [firstByte, secondByte, thirdByte]
 
 
-def returnFrequency(freqBytes):
+def return_frequency(freqBytes):
     """
-    The reverse of frequencyTransform. Given a byte stream, return a frequency.
+    The reverse of frequency_transform. Given a byte stream, return a frequency.
     """
     resolution = 16384.0
     baseFrequency = 440 * pow(2.0, (float(freqBytes[0] - 69.0) / 12.0))

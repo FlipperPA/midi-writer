@@ -105,16 +105,16 @@ duration = 1  # In beats
 tempo = 60  # In BPM
 volume = 100  # 0-127, as per the MIDI standard
 
-MyMIDI = MIDIFile(1)  # One track
-MyMIDI.addTempo(track, time, tempo)
+midi_file = MIDIFile(1)  # One track
+midi_file.add_tempo(track, time, tempo)
 
 for i, pitch in enumerate(degrees):
-    MyMIDI.addNote(track, channel, pitch, time + i, duration, volume)
+    midi_file.add_note(track, channel, pitch, time + i, duration, volume)
 
 print("Added notes to file")
 
 with open("major-scale.mid", "wb") as output_file:
-    MyMIDI.writeFile(output_file)
+    midi_file.write_file(output_file)
 ```
 
 There are several additional event types that can be added and there are
