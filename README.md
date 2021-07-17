@@ -1,6 +1,6 @@
 # python-midi
 
-This package is a Python 3 only rewrite of Mark C. Wirt's excellent MIDIUtil.
+This package is a Python 3 only rewrite of [Mark C. Wirt's](https://github.com/MarkCWirt) excellent MIDIUtil.
 
 ## Introduction
 
@@ -36,63 +36,11 @@ See License.txt in the source distribution for details.
 
 ## Installation
 
-The latest, stable version of MIDIUtil is hosted at the `Python Package
-Index <https://pypi.python.org/pypi/MIDIUtil/>`__ and can be installed
-via the normal channels:
-
-.. code:: bash
-
-  pip install MIDIUtil
-
-Source code is available on `Github <https://github.com/MarkCWirt/MIDIUtil>`__ ,
-and be cloned with one of the following URLS:
-
-.. code:: bash
-
-    git clone git@github.com:MarkCWirt/MIDIUtil.git
-    # or
-    git clone https://github.com/MarkCWirt/MIDIUtil.git
-
-depending on if you want to use SSH or HTTPS. (The source code
-for stable releases can also be downloaded from the
-`Releases <https://github.com/MarkCWirt/MIDIUtil/releases>`__
-page.)
-
-To use the library one can either install it on one's system:
-
-.. code:: bash
-
-    python setup.py install
-
-or point your ``$PYTHONPATH`` environment variable to the directory
-containing ``midiutil`` (i.e., ``src``).
-
-MIDIUtil is pure Python and should work on any platform to which
-Python has been ported.
-
-If you're using this software in your own projects
-you may want to consider distributing the library bundled with yours;
-the library is small and self-contained, and such bundling makes things
-more convenient for your users. The best way of doing this is probably
-to copy the midiutil directory directly to your package directory and
-then refer to it with a fully qualified name. This will prevent it from
-conflicting with any version of the software that may be installed on
-the target system.
-
+Eventually, you'll be able to install this from PyPI with something like `pip install midi`. But for now, do a `git clone https://github.com/FlipperPA/python-midi.git`, and `pip install python-midi`.
 
 ## Quick Start
 
-Using the software is easy:
-
-* The package must be imported into your namespace
-* A MIDIFile object is created
-* Events (notes, tempo-changes, etc.) are added to the object
-* The MIDI file is written to disk.
-
-Detailed documentation is provided; what follows is a simple example
-to get you going quickly. In this example we'll create a one track MIDI
-File, assign a tempo to the track, and write a C-Major scale. Then we
-write it to disk.
+In this example we'll create a one track MIDI File, assign a tempo to the track, and write a C-Major scale. Then we write it to disk.
 
 ```python
 from midi import MIDIFile
@@ -111,8 +59,6 @@ midi_file.add_tempo(track, time, tempo)
 for i, pitch in enumerate(degrees):
     midi_file.add_note(track, channel, pitch, time + i, duration, volume)
 
-print("Added notes to file")
-
 with open("major-scale.mid", "wb") as output_file:
     midi_file.write_file(output_file)
 ```
@@ -127,10 +73,12 @@ the library is provided in the documentation directory.
 
 Have fun!
 
-## Thank You
+## Contributors
 
-I'd like to mention the following people who have given feedback, bug
-fixes,  and suggestions on the library:
+* Timothy Allen: author of Python 3 re-write.
+* Mark C. Wirt: the original author of the excellent MIDIUtil package.
+
+Feedback, bug fixes, and suggestions:
 
 * Bram de Jong
 * Mike Reeves-McMillan
