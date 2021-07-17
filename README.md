@@ -1,11 +1,6 @@
-# MIDIUtil
+# python-midi
 
-This is just a brief adumbration. Full documentation for the release
-version can be found at `Read the Docs
-<http://midiutil.readthedocs.io/>`_. The documentation for the
-development version is `here <http://midiutil.readthedocs.io/en/latest/>`_.
-
-|docs|
+This package is a Python 3 only rewrite of Mark C. Wirt's excellent MIDIUtil.
 
 ## Introduction
 
@@ -100,22 +95,23 @@ File, assign a tempo to the track, and write a C-Major scale. Then we
 write it to disk.
 
 ```python
-from midiutil import MIDIFile
+from midi import MIDIFile
 
-degrees  = [60, 62, 64, 65, 67, 69, 71, 72]  # MIDI note number
-track    = 0
-channel  = 0
-time     = 0    # In beats
-duration = 1    # In beats
-tempo    = 60   # In BPM
-volume   = 100  # 0-127, as per the MIDI standard
+degrees = [60, 62, 64, 65, 67, 69, 71, 72]  # MIDI note number
+track = 0
+channel = 0
+time = 0  # In beats
+duration = 1  # In beats
+tempo = 60  # In BPM
+volume = 100  # 0-127, as per the MIDI standard
 
-MyMIDI = MIDIFile(1)  # One track, defaults to format 1 (tempo track is created
-                      # automatically)
+MyMIDI = MIDIFile(1)  # One track
 MyMIDI.addTempo(track, time, tempo)
 
 for i, pitch in enumerate(degrees):
     MyMIDI.addNote(track, channel, pitch, time + i, duration, volume)
+
+print("Added notes to file")
 
 with open("major-scale.mid", "wb") as output_file:
     MyMIDI.writeFile(output_file)
