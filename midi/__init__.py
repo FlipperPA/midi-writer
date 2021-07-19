@@ -33,7 +33,7 @@ __all__ = ["MIDIFile", "Notes", "MAJOR", "MINOR", "SHARPS", "FLATS"]
 
 class Notes(object):
     """
-    Maps notes to MIDI numbers.
+    Maps musical scale notes to the equivalent MIDI numbers.
     """
     def set_note(self, key, value):
         if value <= 108:
