@@ -1,4 +1,8 @@
-/media
+# Virtual Envs
+venv
+
+# MIDI Files
+*.mid
 
 # Python bytecode:
 *.py[co]
@@ -42,39 +46,12 @@ Desktop.ini
 .idea
 .vagrant
 
-# Ignore local configurations
-config/settings/local.py
-db.sqlite3
-
 # Node modules
 node_modules/
-
-# Bower components
-bower_components/
 
 # Coverage
 htmlcov/
 .coverage
-
-# dumpdata file
-db.json
-/static
-/config/settings/user.py
-/venv
-/django-wrds.log.1
-/django-wrds.log.2
-/django-wrds.log.3
-/django-wrds.log.4
-/django-wrds.log.5
-/django-wrds.log.6
-/django-wrds.log.7
-/django-wrds.log.8
-/django-wrds.log.9
-/uninstall
-/uninstall.bak
-/src
-/uninstall
-/uninstall.bak
 
 # Local editor config files
 .editorconfig
