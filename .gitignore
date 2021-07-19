@@ -15,6 +15,9 @@ build
 # Logs:
 *.log
 
+# Eclipse
+.project
+
 # Linux Editors
 *~
 \#*\#
@@ -35,50 +38,48 @@ tramp
 Thumbs.db
 Desktop.ini
 
-# Dev tools and config files
+# Dev tools
 .idea
 .vagrant
-.vscode
+
+# Ignore local configurations
+config/settings/local.py
+db.sqlite3
+
+# Node modules
+node_modules/
+
+# Bower components
+bower_components/
+
+# Coverage
+htmlcov/
+.coverage
+
+# dumpdata file
+db.json
+/static
+/config/settings/user.py
+/venv
+/django-wrds.log.1
+/django-wrds.log.2
+/django-wrds.log.3
+/django-wrds.log.4
+/django-wrds.log.5
+/django-wrds.log.6
+/django-wrds.log.7
+/django-wrds.log.8
+/django-wrds.log.9
+/uninstall
+/uninstall.bak
+/src
+/uninstall
+/uninstall.bak
+
+# Local editor config files
 .editorconfig
 .ftpconfig
 .ftpignore
 .jshintignore
 .lintignore
 project.cson
-.env
-.project
-
-# Ignore local configurations
-config/settings/user.py
-config/settings/local.py
-db.sqlite3
-
-# Node modules
-node_modules/
-*node_modules/
-
-#sass cache
-*sass-cache/
-
-# PostgreSQL Backups
-db_backup/
-
-# Coverage/Tests
-htmlcov/
-.coverage
-django-queries-results.html
-.pytest-queries
-
-# dumpdata file
-db.json
-/static
-/venv
-/django-wrds.log*
-/uninstall*
-/src
-
-# Ignore wrds styles visual diff tool related assets
-/wrds_styles/visual_diff_tool/config.json
-/wrds_styles/visual_diff_tool/screenshots/*
-/wrds_styles/visual_diff_tool/comparison/*
-/wrds_styles/visual_diff_tool/reference_screenshots/*
