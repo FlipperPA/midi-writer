@@ -1,15 +1,3 @@
-# -----------------------------------------------------------------------------
-# Name:        MidiFile.py
-# Purpose:     MIDI file manipulation utilities
-#
-# Author:      Mark Conway Wirt <emergentmusics) at (gmail . com>
-#
-# Created:     2008/04/17
-# Copyright:   (c) 2009-2016 Mark Conway Wirt
-# License:     Please see License.txt for the terms under which this
-#              software is distributed.
-# -----------------------------------------------------------------------------
-
 import math
 import struct
 
