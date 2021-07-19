@@ -37,7 +37,7 @@ class Notes(object):
         while octave < 8:
             for note in SCALE:
                 if note in HAS_FLATS and note != "A" and octave != "0":
-                    self.set_note(f"{note}{octave}f", midi_number - 1)
+                    self.set_note(f"{note}f{octave}", midi_number - 1)
                 
                 if note == "C":
                     octave += 1
@@ -46,7 +46,7 @@ class Notes(object):
                 midi_number += 1
 
                 if note in HAS_SHARPS:
-                    self.set_note(f"{note}{octave}s", midi_number)
+                    self.set_note(f"{note}s{octave}", midi_number)
                     midi_number += 1
 
 
