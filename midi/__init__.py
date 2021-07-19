@@ -29,7 +29,37 @@ MINOR = 1
 SHARPS = 1
 FLATS = -1
 
-__all__ = ["MIDIFile", "MAJOR", "MINOR", "SHARPS", "FLATS"]
+__all__ = ["MIDIFile", "Notes", "MAJOR", "MINOR", "SHARPS", "FLATS"]
+
+class Notes(object):
+    """
+    Maps notes to MIDI numbers.
+    """
+    def set_note(self, key, value):
+        if value <= 108:
+            setattr(self, key, value)
+
+    def __init__(self):
+        SCALE = ("A", "B", "C", "D", "E", "F", "G")
+        HAS_SHARPS = ("A", "C", "D", "F", "G")
+        HAS_FLATS = ("A", "B", "D", "E", "B")
+        midi_number = 21
+        octave = 0
+
+        while octave < 8:
+            for note in SCALE:
+                if note in HAS_FLATS and note != "A" and octave != "0":
+                    self.set_note(f"{note}{octave}f", midi_number - 1)
+                
+                if note == "C":
+                    octave += 1
+
+                self.set_note(f"{note}{octave}", midi_number)
+                midi_number += 1
+
+                if note in HAS_SHARPS:
+                    self.set_note(f"{note}{octave}s", midi_number)
+                    midi_number += 1
 
 
 class GenericEvent(object):
