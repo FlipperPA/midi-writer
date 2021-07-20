@@ -64,6 +64,15 @@ the library is provided in the documentation directory.
 
 Have fun!
 
+## A Note on Channels
+
+Due to conventions, it is typically to use two channels. Since we're using zero-based indexing:
+
+* `Channel 0` is typically used by all instruments other than percussion.
+* `Channel 9` is typically reserved for percussion instruments, I.e. the drum set.
+
+Tracks can be used within those channels. For example, you might want one track for the high hat, and another track to handle the bass, snare, and toms.
+
 ## Contributors
 
 * Timothy Allen: author of Python 3 re-write.
