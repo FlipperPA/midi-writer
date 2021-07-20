@@ -1,4 +1,7 @@
-from midi import MIDIFile, Notes
+# Import the MIDIFile class
+from midi import MIDIFile
+
+# Import all note mappings for use in scales.
 from midi.constants import *
 
 degrees = {}
