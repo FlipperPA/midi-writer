@@ -1,3 +1,4 @@
+# Map the instrument strings to their MIDI values
 INSTRUMENTS = {
     "Acoustic Grand Piano": 0,
     "Bright Acoustic Piano": 1,
@@ -129,6 +130,7 @@ INSTRUMENTS = {
     "Gunshot": 127,
 }
 
+# Map the percussion strings to their MIDI values
 PERCUSSION = {
     "High Q": 26,
     "Slap": 27,
@@ -193,6 +195,7 @@ PERCUSSION = {
     "Open Surdo": 86,
 }
 
+# Map notes to the MIDI values
 A0 = 21
 As0 = 22
 Bf0 = 22
