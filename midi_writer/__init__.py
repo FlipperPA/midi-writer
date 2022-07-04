@@ -19,10 +19,12 @@ FLATS = -1
 
 __all__ = ["MIDIFile", "Notes", "MAJOR", "MINOR", "SHARPS", "FLATS"]
 
+
 class Notes(object):
     """
     Maps musical scale notes to the equivalent MIDI numbers.
     """
+
     def set_note(self, key, value):
         if value <= 108:
             setattr(self, key, value)
@@ -38,7 +40,7 @@ class Notes(object):
             for note in SCALE:
                 if note in HAS_FLATS and note != "A" and octave != "0":
                     self.set_note(f"{note}f{octave}", midi_number - 1)
-                
+
                 if note == "C":
                     octave += 1
 
@@ -762,7 +764,9 @@ class MIDITrack(object):
             )
         )
 
-    def add_pitch_wheel_event(self, channel, tick, pitch_wheel_value, insertion_order=0):
+    def add_pitch_wheel_event(
+        self, channel, tick, pitch_wheel_value, insertion_order=0
+    ):
         """
         Add a pitch wheel event.
         """
@@ -1737,7 +1741,9 @@ class MIDIFile(object):
         The specified tuning should already have been written to the
         stream with ``change_note_tuning``.
         """
-        self.make_rpn_call(track, channel, time, 0, 3, 0, program, time_order=time_order)
+        self.make_rpn_call(
+            track, channel, time, 0, 3, 0, program, time_order=time_order
+        )
 
     def change_note_tuning(
         self, track, tunings, sysExChannel=0x7F, realTime=True, tuningProgam=0
