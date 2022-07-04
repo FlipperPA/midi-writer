@@ -8,21 +8,9 @@ programs (both format 1 and format 2 files are now supported).
 It is object-oriented and allows one to create and write these
 files with a minimum of fuss.
 
-MIDIUtil isn't a full implementation of the MIDI specification. The actual
-specification is a large, sprawling document which has organically grown
-over the course of decades. I have selectively implemented some of the
-more useful and common aspects of the specification. The choices have
-been somewhat idiosyncratic; I largely implemented what I needed. When
-I decided that it could be of use to other people I fleshed it out a bit,
-but there are still things missing. Regardless, the code is fairly easy to
-understand and well structured. Additions can be made to the library by
-anyone with a good working knowledge of the MIDI file format and a good,
-working knowledge of Python. Documentation for extending the library
-is provided.
-
 ## Installation
 
-Eventually, you'll be able to install this from PyPI with something like `pip install midi`. But for now, do a `git clone https://github.com/FlipperPA/python-midi.git`, and `pip install python-midi`.
+Eventually, you'll be able to install this from PyPI with something like `pip install midi-writer`. But for now, do a `git clone https://github.com/FlipperPA/midi-writer.git`, and `pip install -e midi-writer`.
 
 ## Quick Start
 
