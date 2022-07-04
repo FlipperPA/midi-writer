@@ -1,6 +1,4 @@
-# midi-writer
-
-This package is a Python 3 only rewrite of [Mark C. Wirt's](https://github.com/MarkCWirt) excellent MIDIUtil.
+# midi-writer Introduction
 
 ## Introduction
 
@@ -73,19 +71,12 @@ Due to conventions, it is typically to use two channels. Since we're using zero-
 
 Tracks can be used within those channels. For example, you might want one track for the high hat, and another track to handle the bass, snare, and toms.
 
-## Contributors
+## Release Notes and Contributors
 
-* Timothy Allen: author of Python 3 re-write.
-* Mark C. Wirt: the original author of the excellent MIDIUtil package.
+* [Release notes](https://github.com/flipperpa/midi-writer/releases)
+* [Our wonderful contributors](https://github.com/flipperpa/midi-writer/graphs/contributors)
 
-Feedback, bug fixes, and suggestions:
+## Maintainer & Original Author
 
-* Bram de Jong
-* Mike Reeves-McMillan
-* Egg Syntax
-* Nils Gey
-* Francis G.
-* cclauss (Code formating cleanup and PEP-8 stuff, which I'm not good at following).
-* Philippe-Adrien Nousse (Adphi) for the pitch bend implementation.
-* meteorsw (https://github.com/meteorsw) for major restructuring and clean-up
-  of code.
+* [Timothy Allen](https://github.com/flipperpa): maintainer
+* [Mark C. Wirt's](https://github.com/MarkCWirt): author of the original; thank you for all of your work!
