@@ -67,4 +67,4 @@ Tracks can be used within those channels. For example, you might want one track 
 ## Maintainer & Original Author
 
 * [Timothy Allen](https://github.com/flipperpa): maintainer
-* [Mark C. Wirt's](https://github.com/MarkCWirt): author of the original; thank you for all of your work!
+* [Mark C. Wirt](https://github.com/MarkCWirt): author of the original; thank you for all of your work!
