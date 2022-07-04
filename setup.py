@@ -5,14 +5,14 @@ with open("README.md") as file:
     long_description = file.read()
 
 setup(
-    name="python-midi",
-    description="A pure python library for creating multi-track MIDI files",
+    name="midi-writer",
+    description="A pure python library for writing multi-track MIDI files.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    author="Mark Conway Wirt",
-    author_email="MarkCWirt@gmail.com",
+    author="Timothy Allen",
+    author_email="flipper@peregrinesalon.com",
     license="MIT",
-    url="https://github.com/MarkCWirt/MIDIUtil",
+    url="https://github.com/FlipperPA/midi-writer",
     setup_requires=["setuptools_scm"],
     use_scm_version=True,
     packages=find_packages(),
