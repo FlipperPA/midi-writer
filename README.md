@@ -1,10 +1,10 @@
-# python-midi
+# midi-writer
 
 This package is a Python 3 only rewrite of [Mark C. Wirt's](https://github.com/MarkCWirt) excellent MIDIUtil.
 
 ## Introduction
 
-MIDIUtil is a pure Python library that allows one to write multi-track
+`midi-writer` is a pure Python library that allows one to write multi-track
 Musical Instrument Digital Interface (MIDI) files from within Python
 programs (both format 1 and format 2 files are now supported).
 It is object-oriented and allows one to create and write these
@@ -31,7 +31,7 @@ Eventually, you'll be able to install this from PyPI with something like `pip in
 In this example we'll create a one track MIDI File, assign a tempo to the track, and write a C-Major scale. Then we write it to disk.
 
 ```python
-from midi import MIDIFile, Notes
+from midi_writer import MIDIFile, Notes
 
 _ = Notes()  # The Notes class maps notes to their MIDI equivalents
 degrees = [_.C4, _.D4, _.E4, _.F4, _.G4, _.A4, _.B4, _.C5]
