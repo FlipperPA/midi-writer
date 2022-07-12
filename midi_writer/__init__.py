@@ -111,11 +111,11 @@ class NoteOn(GenericEvent):
     sec_sort_order = 3
 
     def __init__(
-        self, channel, pitch, tick, duration, volume, annotation=None, insertion_order=0
+        self, channel, pitch, tick, duration, velocity, annotation=None, insertion_order=0
     ):
         self.pitch = pitch
         self.duration = duration
-        self.volume = volume
+        self.velocity = velocity
         self.channel = channel
         self.annotation = annotation
         super(NoteOn, self).__init__(tick, insertion_order)
@@ -138,7 +138,7 @@ class NoteOn(GenericEvent):
             self.tick,
             self.duration,
             self.channel,
-            self.volume,
+            self.velocity,
         )
 
     def serialize(self, previous_event_tick):
@@ -152,7 +152,7 @@ class NoteOn(GenericEvent):
             midibytes += struct.pack(">B", timeByte)
         midibytes += struct.pack(">B", code)
         midibytes += struct.pack(">B", self.pitch)
-        midibytes += struct.pack(">B", self.volume)
+        midibytes += struct.pack(">B", self.velocity)
         return midibytes
 
 
