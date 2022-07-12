@@ -26,13 +26,13 @@ channel = 0
 time = 0  # In beats
 duration = 1  # In beats
 tempo = 60  # In BPM
-volume = 100  # 0-127, as per the MIDI standard
+velocity = 100  # 0-127, as per the MIDI standard - often used for VOLUME
 
 MyMIDI = MIDIFile(1)  # One track
 MyMIDI.add_tempo(track, time, tempo)
 
 for i, pitch in enumerate(degrees):
-    MyMIDI.add_note(track, channel, pitch, time + i, duration, volume)
+    MyMIDI.add_note(track, channel, pitch, time + i, duration, velocity)
 
 with open("major-scale.mid", "wb") as output_file:
     MyMIDI.write_file(output_file)
