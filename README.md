@@ -52,7 +52,7 @@ Have fun!
 
 ## A Note on Channels
 
-Due to conventions, it is typically to use two channels. Since we're using zero-based indexing:
+Due to ancient MIDI conventions, it is typical to use two channels. Since we're using zero-based indexing:
 
 * `Channel 0` is typically used by all instruments other than percussion.
 * `Channel 9` is typically reserved for percussion instruments, I.e. the drum set.
