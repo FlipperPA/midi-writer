@@ -2,15 +2,11 @@
 
 ## Introduction
 
-`midi-writer` is a pure Python library that allows one to write multi-track
-Musical Instrument Digital Interface (MIDI) files from within Python
-programs (both format 1 and format 2 files are now supported).
-It is object-oriented and allows one to create and write these
-files with a minimum of fuss.
+`midi-writer` is a pure Python library that writes multi-track Musical Instrument Digital Interface (MIDI) files, supporting both format 1 and format 2.
 
 ## Installation
 
-Eventually, you'll be able to install this from PyPI with something like `pip install midi-writer`. But for now, do a `git clone https://github.com/FlipperPA/midi-writer.git`, and `pip install -e midi-writer`.
+This may be published to PyPI some day, but for now, do a `git clone https://github.com/FlipperPA/midi-writer.git`, and `pip install -e midi-writer`.
 
 ## Quick Start
 
@@ -40,13 +36,9 @@ with open("major-scale.mid", "wb") as output_file:
 print("The MIDI file has been written successfully.")
 ```
 
-There are several additional event types that can be added and there are
-various options available for creating the MIDIFile object, but the above
-is sufficient to begin using the library and creating note sequences.
+There are several additional event types that can be added and there are various options available for creating the MIDIFile object, but the above is sufficient to begin using the library and creating note sequences.
 
-The above code is found in machine-readable form in the examples directory.
-A detailed class reference and documentation describing how to extend
-the library is provided in the documentation directory.
+The above code is available in the examples directory. A detailed class reference and documentation describing how to extend the library is provided in the documentation directory.
 
 Have fun!
 
