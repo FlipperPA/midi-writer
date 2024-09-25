@@ -1,3 +1,7 @@
+"""
+This example writes two files, "major-scale.mid" and "chromatic-scale.mid".
+"""
+
 # Import the MIDIFile class
 from midi import MIDIFile
 
@@ -24,4 +28,4 @@ for loop in ("major", "chromatic"):
     with open(f"{loop}-scale.mid", "wb") as output_file:
         MyMIDI.write_file(output_file)
 
-print("The MIDI file has been written successfully.")
+print("The MIDI files have been written successfully.")
