@@ -1,7 +1,6 @@
-############################################################################
-# A sample program to create a single-track MIDI file, add a note,
-# and write to disk.
-############################################################################
+"""
+A sample program to create a single-track MIDI file, add a note, and write to disk.
+"""
 
 # Import the library
 from midiutil import MIDIFile
